@@ -1,0 +1,6 @@
+version: "2"
+services:
+  node:
+    image: channel_orchestrator
+    restart: "no"
+
