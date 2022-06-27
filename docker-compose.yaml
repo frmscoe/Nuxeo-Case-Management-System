@@ -1,6 +1,19 @@
-version: "2"
+version: '3.5'
 services:
-  node:
-    image: channel_orchestrator
-    restart: "no"
+  proxy:
+    image: docker.packages.nuxeo.com/nuxeo/nginx-centos7:0.0.1
+    volumes:
+      - ./nginx.proxy.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - "8080:80"
+    links:
+      - nuxeo
+      - webui
 
+  webui:
+    image: nuxeoui:latest
+    build:
+      context: .
+    
+  nuxeo:
+    image: nuxeo:latest
